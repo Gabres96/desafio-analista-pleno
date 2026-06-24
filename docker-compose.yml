@@ -22,11 +22,12 @@ services:
       DATABASE_URL: postgres://admin:adminpassword@db:5432/luto_curitiba
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:3000
     container_name: luto_frontend
     ports:
-      - "5173:5173"
+      - "80:80"
     depends_on:
       - backend
-    environment:
-      - VITE_API_URL=http://localhost:3000
