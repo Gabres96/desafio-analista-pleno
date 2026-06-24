@@ -7,7 +7,7 @@
 | **Frontend** | https://desafio-analista-pleno.vercel.app |
 | **API Backend** | https://desafio-analista-pleno.onrender.com |
 
-> **Nota:** o backend está hospedado no Render (free tier). Se a API não responder imediatamente na primeira abertura, aguarde até 60 segundos — o servidor pode estar "acordando" após um período de inatividade.
+> **Atenção:** o backend usa o plano gratuito do Render e pode demorar até 60 segundos para responder na primeira requisição após um período sem uso.
 
 ---
 
