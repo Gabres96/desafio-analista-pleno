@@ -4,7 +4,7 @@ interface Props {
 
 export function EmptyState({ filtered }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-gray-500">
+    <div className="flex flex-col items-center justify-center py-20 text-stone-400">
       <p className="text-lg font-medium">
         {filtered
           ? 'Nenhum velório encontrado para este registro.'

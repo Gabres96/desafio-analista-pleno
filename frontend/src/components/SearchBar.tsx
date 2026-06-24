@@ -17,18 +17,18 @@ export function SearchBar({ value, onChange, onSearch }: Props) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none"
+        className="flex-1 rounded-lg border border-stone-300 px-4 py-2 text-sm focus:border-amber-500 focus:outline-none"
       />
       <button
         onClick={onSearch}
-        className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+        className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700"
       >
         Buscar
       </button>
       {value && (
         <button
           onClick={() => onChange('')}
-          className="rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50"
+          className="rounded-lg border border-stone-300 px-4 py-2 text-sm text-stone-600 hover:bg-stone-100"
         >
           Limpar
         </button>
