@@ -60,6 +60,7 @@ export class PdfService {
   }
 
   private formatDate(iso: string): string {
+    if (!iso) return '—';
     return new Date(iso).toLocaleString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
