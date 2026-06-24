@@ -3,6 +3,7 @@ import { Response } from 'express';
 import { VeloriosController } from './velorios.controller';
 import { VeloriosService } from './velorios.service';
 import { PdfService } from '../pdf/pdf.service';
+import { FilterVelorioDto } from './dto/filter-velorio.dto';
 import { ListVelorioDto } from './dto/list-velorio.dto';
 
 const mockVelorios: ListVelorioDto[] = [
@@ -47,7 +48,7 @@ describe('VeloriosController', () => {
     it('should return active velorios without filter', async () => {
       veloriosService.findActive.mockResolvedValueOnce(mockVelorios);
 
-      const result = await controller.findActive();
+      const result = await controller.findActive({} as FilterVelorioDto);
 
       expect(result).toEqual(mockVelorios);
       expect(veloriosService.findActive).toHaveBeenCalledWith(undefined);
@@ -56,7 +57,7 @@ describe('VeloriosController', () => {
     it('should pass registro to service when provided', async () => {
       veloriosService.findActive.mockResolvedValueOnce([mockVelorios[0]]);
 
-      const result = await controller.findActive('REG-2026-0001');
+      const result = await controller.findActive({ registro: 'REG-2026-0001' });
 
       expect(result).toHaveLength(1);
       expect(veloriosService.findActive).toHaveBeenCalledWith('REG-2026-0001');
@@ -65,7 +66,9 @@ describe('VeloriosController', () => {
     it('should return empty array when no velorios found', async () => {
       veloriosService.findActive.mockResolvedValueOnce([]);
 
-      const result = await controller.findActive('REG-INEXISTENTE');
+      const result = await controller.findActive({
+        registro: 'REG-INEXISTENTE',
+      });
 
       expect(result).toEqual([]);
     });

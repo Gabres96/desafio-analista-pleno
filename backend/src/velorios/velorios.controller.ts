@@ -2,6 +2,7 @@ import { Controller, Get, Param, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { VeloriosService } from './velorios.service';
 import { PdfService } from '../pdf/pdf.service';
+import { FilterVelorioDto } from './dto/filter-velorio.dto';
 import { ListVelorioDto } from './dto/list-velorio.dto';
 
 @Controller('velorios')
@@ -12,8 +13,8 @@ export class VeloriosController {
   ) {}
 
   @Get()
-  findActive(@Query('registro') registro?: string): Promise<ListVelorioDto[]> {
-    return this.veloriosService.findActive(registro);
+  findActive(@Query() filter: FilterVelorioDto): Promise<ListVelorioDto[]> {
+    return this.veloriosService.findActive(filter.registro);
   }
 
   @Get(':id/banner')
