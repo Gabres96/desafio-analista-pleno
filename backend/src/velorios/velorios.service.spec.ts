@@ -57,10 +57,9 @@ describe('VeloriosService', () => {
 
       await service.findActive('REG-2026-0001');
 
-      expect(dbQuery).toHaveBeenCalledWith(
-        expect.any(String),
-        ['REG-2026-0001'],
-      );
+      expect(dbQuery).toHaveBeenCalledWith(expect.any(String), [
+        'REG-2026-0001',
+      ]);
     });
 
     it('should pass null when no registro provided', async () => {
