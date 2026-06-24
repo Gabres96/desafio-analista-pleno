@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Response } from 'express';
 import { VeloriosController } from './velorios.controller';
 import { VeloriosService } from './velorios.service';
+import { PdfService } from '../pdf/pdf.service';
 import { ListVelorioDto } from './dto/list-velorio.dto';
 
 const mockVelorios: ListVelorioDto[] = [
@@ -19,6 +21,7 @@ const mockVelorios: ListVelorioDto[] = [
 describe('VeloriosController', () => {
   let controller: VeloriosController;
   let veloriosService: jest.Mocked<VeloriosService>;
+  let pdfService: jest.Mocked<PdfService>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -26,13 +29,18 @@ describe('VeloriosController', () => {
       providers: [
         {
           provide: VeloriosService,
-          useValue: { findActive: jest.fn() },
+          useValue: { findActive: jest.fn(), findById: jest.fn() },
+        },
+        {
+          provide: PdfService,
+          useValue: { generateBanner: jest.fn() },
         },
       ],
     }).compile();
 
     controller = module.get<VeloriosController>(VeloriosController);
     veloriosService = module.get(VeloriosService);
+    pdfService = module.get(PdfService);
   });
 
   describe('findActive', () => {
@@ -60,6 +68,25 @@ describe('VeloriosController', () => {
       const result = await controller.findActive('REG-INEXISTENTE');
 
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('getBanner', () => {
+    it('should generate and send PDF for a valid velorio', async () => {
+      const mockPdf = Buffer.from('pdf-content');
+      veloriosService.findById.mockResolvedValueOnce(mockVelorios[0]);
+      pdfService.generateBanner.mockReturnValueOnce(mockPdf);
+
+      const res = { set: jest.fn(), end: jest.fn() } as unknown as Response;
+
+      await controller.getBanner('1', res);
+
+      expect(veloriosService.findById).toHaveBeenCalledWith('1');
+      expect(pdfService.generateBanner).toHaveBeenCalledWith(mockVelorios[0]);
+      expect(res.set).toHaveBeenCalledWith(
+        expect.objectContaining({ 'Content-Type': 'application/pdf' }),
+      );
+      expect(res.end).toHaveBeenCalledWith(mockPdf);
     });
   });
 });
