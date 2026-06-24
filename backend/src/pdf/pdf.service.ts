@@ -4,54 +4,69 @@ import { ListVelorioDto } from '../velorios/dto/list-velorio.dto';
 
 @Injectable()
 export class PdfService {
-  generateBanner(velorio: ListVelorioDto): Buffer {
-    const chunks: Buffer[] = [];
-    const doc = new PDFDocument({ size: 'A4', margin: 50 });
+  generateBanner(velorio: ListVelorioDto): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+      const doc = new PDFDocument({ size: 'A4', margin: 60 });
+      const chunks: Buffer[] = [];
 
-    doc.on('data', (chunk: Buffer) => chunks.push(chunk));
-    doc.end();
+      doc.on('data', (chunk: Buffer) => chunks.push(chunk));
+      doc.on('end', () => resolve(Buffer.concat(chunks)));
+      doc.on('error', reject);
 
-    this.renderBanner(doc, velorio);
+      doc
+        .fontSize(28)
+        .font('Helvetica-Bold')
+        .text('Memorial Luto Curitiba', { align: 'center' });
 
-    return Buffer.concat(chunks);
+      doc.moveDown(1.5);
+      doc.moveTo(60, doc.y).lineTo(535, doc.y).stroke();
+      doc.moveDown(1.5);
+
+      doc
+        .fontSize(22)
+        .font('Helvetica-Bold')
+        .text(velorio.nomeCompleto, { align: 'center' });
+
+      doc.moveDown(2);
+
+      this.addField(
+        doc,
+        'Início do Velório',
+        this.formatDate(velorio.horarioInicioVelorio),
+      );
+      this.addField(
+        doc,
+        'Início do Sepultamento',
+        this.formatDate(velorio.horarioInicioSepultamento),
+      );
+      this.addField(doc, 'Local do Sepultamento', velorio.localSepultamento);
+      this.addField(doc, 'Funerária Responsável', velorio.funerariaResponsavel);
+
+      doc.end();
+    });
   }
 
-  private renderBanner(doc: PDFKit.PDFDocument, v: ListVelorioDto): void {
-    const formatDate = (iso: string) =>
-      iso
-        ? new Date(iso).toLocaleString('pt-BR', {
-            timeZone: 'America/Sao_Paulo',
-          })
-        : '—';
-
+  private addField(
+    doc: PDFKit.PDFDocument,
+    label: string,
+    value: string,
+  ): void {
     doc
-      .fontSize(22)
+      .fontSize(11)
       .font('Helvetica-Bold')
-      .text('Banner de Velório', { align: 'center' });
+      .text(`${label}:`, { continued: true });
+    doc.fontSize(11).font('Helvetica').text(` ${value}`);
+    doc.moveDown(0.8);
+  }
 
-    doc.moveDown(0.5);
-    doc.moveTo(50, doc.y).lineTo(545, doc.y).stroke();
-    doc.moveDown(1);
-
-    doc
-      .fontSize(28)
-      .font('Helvetica-Bold')
-      .text(v.nomeCompleto, { align: 'center' });
-
-    doc.moveDown(1.5);
-
-    const field = (label: string, value: string) => {
-      doc
-        .fontSize(11)
-        .font('Helvetica-Bold')
-        .text(`${label}:`, { continued: true });
-      doc.fontSize(11).font('Helvetica').text(` ${value}`);
-      doc.moveDown(0.4);
-    };
-
-    field('Início do velório', formatDate(v.horarioInicioVelorio));
-    field('Início do sepultamento', formatDate(v.horarioInicioSepultamento));
-    field('Local de sepultamento', v.localSepultamento);
-    field('Funerária responsável', v.funerariaResponsavel);
+  private formatDate(iso: string): string {
+    return new Date(iso).toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'America/Sao_Paulo',
+    });
   }
 }

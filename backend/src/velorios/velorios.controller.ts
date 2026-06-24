@@ -23,11 +23,17 @@ export class VeloriosController {
     @Res() res: Response,
   ): Promise<void> {
     const velorio = await this.veloriosService.findById(id);
-    const pdf = this.pdfService.generateBanner(velorio);
+    const pdf = await this.pdfService.generateBanner(velorio);
+
+    const filename = velorio.nomeCompleto
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/\s+/g, '-')
+      .toLowerCase();
 
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="banner-${id}.pdf"`,
+      'Content-Disposition': `attachment; filename="banner-${filename}.pdf"`,
       'Content-Length': pdf.length,
     });
 

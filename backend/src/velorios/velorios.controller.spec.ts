@@ -78,7 +78,7 @@ describe('VeloriosController', () => {
     it('should generate and send PDF for a valid velorio', async () => {
       const mockPdf = Buffer.from('pdf-content');
       veloriosService.findById.mockResolvedValueOnce(mockVelorios[0]);
-      pdfService.generateBanner.mockReturnValueOnce(mockPdf);
+      pdfService.generateBanner.mockResolvedValueOnce(mockPdf);
 
       const res = { set: jest.fn(), end: jest.fn() } as unknown as Response;
 
