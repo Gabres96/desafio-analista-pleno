@@ -49,11 +49,9 @@ export class PdfService {
       doc.moveDown(0.4);
     };
 
-    field('Sala', v.sala || '—');
     field('Início do velório', formatDate(v.horarioInicioVelorio));
     field('Início do sepultamento', formatDate(v.horarioInicioSepultamento));
     field('Local de sepultamento', v.localSepultamento);
     field('Funerária responsável', v.funerariaResponsavel);
-    field('Número do registro', v.numeroRegistro);
   }
 }
