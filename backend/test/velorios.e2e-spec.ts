@@ -68,7 +68,6 @@ describe('VeloriosController (integration)', () => {
     });
 
     it('should return empty array for a finished velório registro', async () => {
-      // REG-2026-0009 exists in the database but belongs to a finished velório
       const response = await supertest(app.getHttpServer())
         .get('/velorios')
         .query({ registro: 'REG-2026-0009' })
