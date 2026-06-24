@@ -1,4 +1,35 @@
 # Desafio Técnico: Dashboard de Atendimentos - Luto Curitiba
+
+## Links de Produção
+
+| | URL |
+|---|---|
+| **Frontend** | https://desafio-analista-pleno.vercel.app |
+| **API Backend** | https://desafio-analista-pleno.onrender.com |
+
+> **Nota:** o backend está hospedado no Render (free tier). Se a API não responder imediatamente na primeira abertura, aguarde até 60 segundos — o servidor pode estar "acordando" após um período de inatividade.
+
+---
+
+## Como rodar localmente
+
+**Pré-requisitos:** Docker e Docker Compose instalados.
+
+```bash
+git clone https://github.com/Gabres96/desafio-analista-pleno.git
+cd desafio-analista-pleno
+docker compose up -d
+```
+
+| Serviço | URL local |
+|---|---|
+| Frontend | http://localhost:5173 |
+| API Backend | http://localhost:3000 |
+
+O banco de dados é inicializado automaticamente com dados de mockup na primeira execução.
+
+---
+
 Olá! Agradecemos o seu interesse em fazer parte do nosso time de Tecnologia da Informação. Este desafio foi desenhado para conhecermos melhor suas habilidades técnicas, arquiteturais e de resolução de problemas práticos.
 
 ## 1. Sobre a Luto Curitiba
@@ -85,8 +116,8 @@ Você deverá realizar a publicação utilizando plataformas com camadas gratuit
 Ao finalizar o desafio, você deve:
 1. Garantir que todo o código atualizado esteja com push feito no seu repositório do GitHub (seu Fork).
 2. **Atualizar o topo deste arquivo README.md** incluindo claramente os seus links de produção:
-   * **URL do Frontend no ar:** [Substitua por seu link da Vercel ou Netlify]
-   * **URL da API Backend:** [Substitua por seu link do Render ou Railway]
+   * **URL do Frontend no ar:** https://desafio-analista-pleno.vercel.app
+   * **URL da API Backend:** https://desafio-analista-pleno.onrender.com
 3. Enviar o link do seu repositório para o responsável pelo seu processo seletivo na Luto Curitiba.
 
 Desejamos muito sucesso no seu teste. Estamos ansiosos para ver sua solução!
