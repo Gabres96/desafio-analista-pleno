@@ -38,13 +38,13 @@ describe('PdfService', () => {
       expect(result.toString('ascii', 0, 4)).toBe('%PDF');
     });
 
-    it('should generate PDF for velorio with empty sepultamento date', async () => {
+    it('should generate valid PDF when sepultamento date is empty', async () => {
       const velorio = { ...mockVelorio, horarioInicioSepultamento: '' };
 
       const result = await service.generateBanner(velorio);
 
       expect(result).toBeInstanceOf(Buffer);
-      expect(result.length).toBeGreaterThan(0);
+      expect(result.toString('ascii', 0, 4)).toBe('%PDF');
     });
   });
 });
