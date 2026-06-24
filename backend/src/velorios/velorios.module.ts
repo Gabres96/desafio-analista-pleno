@@ -7,6 +7,5 @@ import { VeloriosService } from './velorios.service';
   imports: [PdfModule],
   controllers: [VeloriosController],
   providers: [VeloriosService],
-  exports: [VeloriosService],
 })
 export class VeloriosModule {}
