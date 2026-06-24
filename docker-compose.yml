@@ -22,9 +22,6 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://admin:adminpassword@db:5432/luto_curitiba
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
 
   frontend:
     build: ./frontend
@@ -35,6 +32,3 @@ services:
       - backend
     environment:
       - VITE_API_URL=http://localhost:3000
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
