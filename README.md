@@ -115,8 +115,8 @@ Você deverá realizar a publicação utilizando plataformas com camadas gratuit
 Ao finalizar o desafio, você deve:
 1. Garantir que todo o código atualizado esteja com push feito no seu repositório do GitHub (seu Fork).
 2. **Atualizar o topo deste arquivo README.md** incluindo claramente os seus links de produção:
-   * **URL do Frontend no ar:** https://desafio-analista-pleno.vercel.app
-   * **URL da API Backend:** https://desafio-analista-pleno.onrender.com
+   * **URL do Frontend no ar:** [Substitua por seu link da Vercel ou Netlify]
+   * **URL da API Backend:** [Substitua por seu link do Render ou Railway]
 3. Enviar o link do seu repositório para o responsável pelo seu processo seletivo na Luto Curitiba.
 
 Desejamos muito sucesso no seu teste. Estamos ansiosos para ver sua solução!
