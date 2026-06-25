@@ -2,10 +2,9 @@
 
 ## Links de Produção
 
-| | URL |
-|---|---|
-| **Frontend** | https://desafio-analista-pleno.vercel.app |
-| **API Backend** | https://desafio-analista-pleno.onrender.com |
+**URL do Frontend no ar:** https://desafio-analista-pleno.vercel.app
+
+**URL da API Backend:** https://desafio-analista-pleno.onrender.com
 
 > **Atenção:** o backend usa o plano gratuito do Render e pode demorar até 60 segundos para responder na primeira requisição após um período sem uso.
 
