@@ -12,7 +12,14 @@ describe('AppController', () => {
     controller = module.get<AppController>(AppController);
   });
 
-  it('should return status ok', () => {
+  it('should return status ok and api name', () => {
+    expect(controller.root()).toEqual({
+      status: 'ok',
+      message: 'Dashboard de Velórios API',
+    });
+  });
+
+  it('should return status ok on health check', () => {
     expect(controller.health()).toEqual({ status: 'ok' });
   });
 });
